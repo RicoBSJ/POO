@@ -1,38 +1,42 @@
-import java.io.File;
+
+//Packages à importer afin d'utiliser l'objet File
+import java.io.*;
 
 public class Test {
-
 	public static void main(String[] args) {
-		// Package à importer afin d'utiliser l'objet File
+		// Nous déclarons nos objets en dehors du bloc try/catch
+		DataInputStream dis;
+		DataOutputStream dos;
+		try {
+			dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File("sdz.txt"))));
 
-		// Création de l'objet File
-		File f = new File("test.txt");
-		System.out.println("Chemin absolu du fichier : " + f.getAbsolutePath());
-		System.out.println("Nom du fichier : " + f.getName());
-		System.out.println("Est-ce qu'il existe ? " + f.exists());
-		System.out.println("Est-ce un répertoire ? " + f.isDirectory());
-		System.out.println("Est-ce un fichier ? " + f.isFile());
+			// Nous allons écrire chaque type primitif
+			dos.writeBoolean(true);
+			dos.writeByte(100);
+			dos.writeChar('C');
+			dos.writeDouble(12.05);
+			dos.writeFloat(100.52f);
+			dos.writeInt(1024);
+			dos.writeLong(123456789654321L);
+			dos.writeShort(2);
+			dos.close();
 
-		System.out.println("Affichage des lecteurs à la racine du PC : ");
-		for (File file : f.listRoots()) {
-			System.out.println(file.getAbsolutePath());
-			try {
-				int i = 1;
-				// On parcourt la liste des fichiers et répertoires
-				for (File nom : file.listFiles()) {
-					// S'il s'agit d'un dossier, on ajoute un "/"
-					System.out.print("\t\t" + ((nom.isDirectory()) ? nom.getName() + "/" : nom.getName()));
+			// On récupère maintenant les données !
+			dis = new DataInputStream(new BufferedInputStream(new FileInputStream(new File("sdz.txt"))));
 
-					if ((i % 4) == 0) {
-						System.out.print("\n");
-					}
-					i++;
-				}
-				System.out.println("\n");
-			} catch (NullPointerException e) {
-				// L'instruction peut générer une NullPointerException
-				// s'il n'y a pas de sous-fichier !
-			}
+			System.out.println(dis.readBoolean());
+			System.out.println(dis.readByte());
+			System.out.println(dis.readChar());
+			System.out.println(dis.readDouble());
+			System.out.println(dis.readFloat());
+			System.out.println(dis.readInt());
+			System.out.println(dis.readLong());
+			System.out.println(dis.readShort());
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }
