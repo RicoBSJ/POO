@@ -1,42 +1,40 @@
-
-//Packages Ã  importer afin d'utiliser l'objet File
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Test {
-	public static void main(String[] args) {
-		// Nous dÃ©clarons nos objets en dehors du bloc try/catch
-		DataInputStream dis;
-		DataOutputStream dos;
-		try {
-			dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File("sdz.txt"))));
+  public static void main(String[] args) {		
+    File file = new File("testFileWriter.txt");
+    FileWriter fw;
+    FileReader fr;
+		
+    try {
+      //Création de l'objet
+      fw = new FileWriter(file);
+      String str = "Bonjour à tous, amis Zéros !\n";
+      str += "\tComment allez-vous ? \n";
+      //On écrit la chaîne
+      fw.write(str);
+      //On ferme le flux
+      fw.close();
+			
+      //Création de l'objet de lecture
+      fr = new FileReader(file);
+      str = "";
+      int i = 0;
+      //Lecture des données
+      while((i = fr.read()) != -1)
+        str += (char)i;
 
-			// Nous allons Ã©crire chaque type primitif
-			dos.writeBoolean(true);
-			dos.writeByte(100);
-			dos.writeChar('C');
-			dos.writeDouble(12.05);
-			dos.writeFloat(100.52f);
-			dos.writeInt(1024);
-			dos.writeLong(123456789654321L);
-			dos.writeShort(2);
-			dos.close();
+      //Affichage
+      System.out.println(str);
 
-			// On rÃ©cupÃ¨re maintenant les donnÃ©es !
-			dis = new DataInputStream(new BufferedInputStream(new FileInputStream(new File("sdz.txt"))));
-
-			System.out.println(dis.readBoolean());
-			System.out.println(dis.readByte());
-			System.out.println(dis.readChar());
-			System.out.println(dis.readDouble());
-			System.out.println(dis.readFloat());
-			System.out.println(dis.readInt());
-			System.out.println(dis.readLong());
-			System.out.println(dis.readShort());
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 }
