@@ -3,14 +3,14 @@ package io;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class Notice implements Serializable {
+public class Notice6 implements Serializable {
 	private String langue;
 
-	public Notice() {
+	public Notice6() {
 		this.langue = "Français";
 	}
 
-	public Notice(String lang) {
+	public Notice6(String lang) {
 		this.langue = lang;
 	}
 

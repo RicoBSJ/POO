@@ -5,7 +5,7 @@ import java.io.*;
 import java.nio.*;
 import java.nio.channels.FileChannel;
 
-public class FileChan {
+public class FileChan10 {
 public static void main(String[] args) throws IOException {
   FileInputStream fis;
   BufferedInputStream bis;

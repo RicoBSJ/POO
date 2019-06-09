@@ -2,7 +2,7 @@ package io;
 
 import java.io.*;
 
-public class ClassFile {
+public class ClassFile9 {
   public static void main(String[] args) {		
     File file = new File("testFileWriter.txt");
     FileWriter fw;

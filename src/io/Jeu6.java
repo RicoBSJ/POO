@@ -4,16 +4,16 @@ package io;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class Jeu implements Serializable{
+public class Jeu6 implements Serializable{
 	  private String nom, style;
 	  private double prix;
-	  private Notice notice;
+	  private Notice6 notice;
 		
-	  public Jeu(String nom, String style, double prix) {
+	  public Jeu6(String nom, String style, double prix) {
 	    this.nom = nom;
 	    this.style = style;
 	    this.prix = prix;
-	    this.notice = new Notice();
+	    this.notice = new Notice6();
 	  }
 
 	  public String toString(){

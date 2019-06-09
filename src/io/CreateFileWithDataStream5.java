@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class CreateFileWithDataStream {
+public class CreateFileWithDataStream5 {
 public static void main(String[] args) {
   //Nous déclarons nos objets en dehors du bloc try/catch
   DataInputStream dis;

@@ -3,7 +3,7 @@ package io;
 //Packages à importer afin d'utiliser l'objet File
 import java.io.*;
 
-public class Jeux {
+public class Jeux6 {
 public static void main(String[] args) {
   //Nous déclarons nos objets en dehors du bloc try/catch
   ObjectInputStream ois;
@@ -15,9 +15,9 @@ public static void main(String[] args) {
                 new File("game.txt"))));
       	
     //Nous allons écrire chaque objet Jeu dans le fichier
-    oos.writeObject(new Jeu("Assassin Creed", "Aventure", 45.69));
-    oos.writeObject(new Jeu("Tomb Raider", "Plateforme", 23.45));
-    oos.writeObject(new Jeu("Tetris", "Stratégie", 2.50));
+    oos.writeObject(new Jeu6("Assassin Creed", "Aventure", 45.69));
+    oos.writeObject(new Jeu6("Tomb Raider", "Plateforme", 23.45));
+    oos.writeObject(new Jeu6("Tetris", "Stratégie", 2.50));
     //Ne pas oublier de fermer le flux !
     oos.close();
       	
@@ -30,9 +30,9 @@ public static void main(String[] args) {
     try {
       System.out.println("Affichage des jeux :");
       System.out.println("*************************\n");
-      System.out.println(((Jeu)ois.readObject()).toString());
-      System.out.println(((Jeu)ois.readObject()).toString());
-      System.out.println(((Jeu)ois.readObject()).toString());
+      System.out.println(((Jeu6)ois.readObject()).toString());
+      System.out.println(((Jeu6)ois.readObject()).toString());
+      System.out.println(((Jeu6)ois.readObject()).toString());
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
     }

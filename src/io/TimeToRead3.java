@@ -7,7 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class TimeToRead {
+public class TimeToRead3 {
 public static void main(String[] args) {
   //Nous déclarons nos objets en dehors du bloc try/catch
   FileInputStream fis;

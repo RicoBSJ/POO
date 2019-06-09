@@ -1,8 +1,6 @@
 package io;
 
-//Packages à importer afin d'utiliser l'objet File
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
+//Packages à importer afin d'utiliser les objets
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,48 +8,75 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class ReadAndCopy2 {
-public static void main(String[] args) {
-  //Nous déclarons nos objets en dehors du bloc try/catch
-  FileInputStream fis;
-  FileOutputStream fos;
-  BufferedInputStream bis;
-  BufferedOutputStream bos; 
-      
-  try {
-    fis = new FileInputStream(new File("test.txt"));
-    fos = new FileOutputStream(new File("test2.txt"));
-    bis = new BufferedInputStream(new FileInputStream(new File("test.txt")));
-    bos = new BufferedOutputStream(new FileOutputStream(new File("test3.txt")));
-    byte[] buf = new byte[8];
+	
+ public static void main(String[] args) {
+	 
+    // Nous déclarons nos objets en dehors du bloc try/catch
+    FileInputStream fis = null;
+    FileOutputStream fos = null;
 
-    //On récupère le temps du système
-    long startTime = System.currentTimeMillis();
-              
-    while(fis.read(buf) != -1){
-      fos.write(buf);
-    }
-    //On affiche le temps d'exécution
-    System.out.println("Temps de lecture + écriture avec FileInputStream et FileOutputStream : " + (System.currentTimeMillis() - startTime));
-              
-    //On réinitialise                
-    startTime = System.currentTimeMillis();
+    try {
+       // On instancie nos objets :
+       // fis va lire le fichier
+       // fos va écrire dans le nouveau !
+       fis = new FileInputStream(new File("test.txt"));
+       fos = new FileOutputStream(new File("test2.txt"));
 
-    while(bis.read(buf) != -1){
-      bos.write(buf);
+       // On crée un tableau de byte pour indiquer le nombre de bytes lus à
+       // chaque tour de boucle
+       byte[] buf = new byte[8];
+
+       // On crée une variable de type int pour y affecter le résultat de
+       // la lecture
+       // Vaut -1 quand c'est fini
+       @SuppressWarnings("unused")
+       int n = 0;
+
+       // Tant que l'affectation dans la variable est possible, on boucle
+       // Lorsque la lecture du fichier est terminée l'affectation n'est
+       // plus possible !
+       // On sort donc de la boucle
+       while ((n = fis.read(buf)) >= 0) {
+          // On écrit dans notre deuxième fichier avec l'objet adéquat
+          fos.write(buf);
+          // On affiche ce qu'a lu notre boucle au format byte et au
+          // format char
+          for (byte bit : buf) {
+             System.out.print("\t" + bit + "(" + (char) bit + ")");
+          }
+          System.out.println("");
+          //Nous réinitialisons le buffer à vide
+          //au cas où les derniers byte lus ne soient pas un multiple de 8
+          //Ceci permet d'avoir un buffer vierge à chaque lecture et ne pas avoir de doublon en fin de fichier
+          buf = new byte[8];
+
+       }
+       System.out.println("Copie terminée !");
+
+    } catch (FileNotFoundException e) {
+       // Cette exception est levée si l'objet FileInputStream ne trouve
+       // aucun fichier
+       e.printStackTrace();
+    } catch (IOException e) {
+       // Celle-ci se produit lors d'une erreur d'écriture ou de lecture
+       e.printStackTrace();
+    } finally {
+       // On ferme nos flux de données dans un bloc finally pour s'assurer
+       // que ces instructions seront exécutées dans tous les cas même si
+       // une exception est levée !
+       try {
+          if (fis != null)
+             fis.close();
+       } catch (IOException e) {
+          e.printStackTrace();
+       }
+
+       try {
+          if (fos != null)
+             fos.close();
+       } catch (IOException e) {
+          e.printStackTrace();
+       }
     }
-    //On réaffiche
-    System.out.println("Temps de lecture + écriture avec BufferedInputStream et BufferedOutputStream : " + (System.currentTimeMillis() - startTime));
-              
-    //On ferme nos flux de données
-    fis.close();
-    bis.close();
-    fos.close();
-    bos.close();
-              
-  } catch (FileNotFoundException e) {
-    e.printStackTrace();
-  } catch (IOException e) {
-    e.printStackTrace();
-  }     	
-}
+ }
 }

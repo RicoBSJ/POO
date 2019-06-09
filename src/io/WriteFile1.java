@@ -3,7 +3,7 @@ package io;
 //Package à importer afin d'utiliser l'objet File
 import java.io.File;
 
-public class WriteFile {
+public class WriteFile1 {
 public static void main(String[] args) {
   //Création de l'objet File
   File f = new File("test.txt");
