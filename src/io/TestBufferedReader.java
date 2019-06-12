@@ -18,9 +18,11 @@ public class TestBufferedReader {
 	}
 
 	private void lecture() {
+		BufferedReader fichier = null;
 		try {
 			String ligne;
-			BufferedReader fichier = new BufferedReader(new FileReader(source));
+			FileReader fileReader = new FileReader(source);
+			fichier = new BufferedReader(fileReader);
 			while ((ligne = fichier.readLine()) != null) {
 				System.out.println(ligne);
 			}
