@@ -7,13 +7,12 @@ public class ReadAndCopy2 {
 
 	public static void main(String[] args) {
 
-		// Nous déclarons nos objets en dehors du bloc try/catch
+		// On instancie nos objets :
+		// fis va lire le fichier
+		// fos va écrire dans le nouveau !
 
 		try (FileInputStream fis = new FileInputStream("test.txt");
 				FileOutputStream fos = new FileOutputStream("test2.txt")) {
-			// On instancie nos objets :
-			// fis va lire le fichier
-			// fos va écrire dans le nouveau !
 
 			// On crée un tableau de byte pour indiquer le nombre de bytes lus à
 			// chaque tour de boucle
